@@ -32,7 +32,7 @@ DELETE statements
 
 ### Joining across tables
 
-Link tables together to get more information using JOIN statements
+Link tables together to get more information using [JOIN statements](https://www.geeksforgeeks.org/sql-join-set-1-inner-left-right-and-full-joins/).
 
 
 ## Part Two
