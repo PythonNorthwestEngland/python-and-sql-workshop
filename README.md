@@ -34,6 +34,54 @@ DELETE statements
 
 Link tables together to get more information using [JOIN statements](https://www.geeksforgeeks.org/sql-join-set-1-inner-left-right-and-full-joins/).
 
+First, let's try some querying
+
+1. Open the database
+2. Go to the "Execute SQL" tab
+3. Type in `SELECT book_id, title, authors FROM books WHERE original_publication_year = 1937;`
+
+4. `SELECT book_id, title, authors FROM books WHERE title like '%hitchhiker%'`
+
+Now lets try adding some data.  This data set is missing python books!
+
+1. Replace that entered SQL with `INSERT INTO books(authors, title, original_title, original_publication_year, isbn13) VALUES ('Luciano Ramalho', 'Fluent Python', 'Fluent Python', 2015, '9781491946008')`
+
+We can also delete out data
+
+1. `DELETE FROM books WHERE original_publication_year = 2000; -- the millenium was overrated`
+
+### aggregations
+
+How many reviews do we have?
+
+`SELECT count(*) FROM ratings`
+
+and for the hobbit?
+
+`SELECT count(*) FROM ratings WHERE book_id = 7`
+
+What else can we do?
+
+`SELECT avg(rating) FROM ratings`
+
+Not so useful, this is our average rating across all books
+
+`SELECT book_id, avg(rating) as avg_rating FROM ratings GROUP BY book_id ORDER BY avg_rating DESC`
+
+But we have IDS so join!
+
+```
+with best_books as (
+	SELECT book_id, avg(rating) as avg_rating FROM ratings GROUP BY book_id ORDER BY avg_rating DESC LIMIT 5
+)
+SELECT
+	books.book_id,
+	books.title,
+	books.authors,
+	avg_rating
+FROM best_books
+LEFT JOIN books ON best_books.book_id = books.book_id;
+```
 
 ## Part Two
 
