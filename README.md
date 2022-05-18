@@ -12,7 +12,28 @@ In the second part of the workshop we'll take what we've learned and create a Py
 
 ## Part One
 
--- details here
+We'll be learning about the main "CRUD" operations and exploring the SnakeReads database.
+
+### Create
+
+INSERT statements
+
+### Read
+
+SELECT statements
+
+### Update
+
+UPDATE statements
+
+### Delete
+
+DELETE statements
+
+### Joining across tables
+
+Link tables together to get more information using JOIN statements
+
 
 ## Part Two
 
