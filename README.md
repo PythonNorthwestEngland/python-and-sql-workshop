@@ -4,7 +4,7 @@ This is the information and code for the Python North West workshop, held on 19t
 
 Before starting, ensure you have a suitable Python environment and a code editor to hand. We'll also be [SQLite Browser](https://sqlitebrowser.org/) for our SQL queries and viewing the SQLite database. There are install instructions on the website.
 
-Next up, download the [SnakeReads book database](https://github.com/PythonNorthwestEngland/python-and-sql-workshop/releases/download/01_data/books.db).
+Next up, download the ~~GoodReads~~ [SnakeReads book database](https://github.com/PythonNorthwestEngland/python-and-sql-workshop/releases/download/01_data/books.db).
 
 For the first part of the workshop we'll be learning how to explore the database and insert new data.
 
@@ -35,7 +35,7 @@ Feel free to replace those things with your own favourite python book, or other 
 
 ### Update
 
-UPDATE statements - changing something.
+UPDATE statements - changing something.  Let's give Luciano his full name:
 
 ```
 UPDATE books
@@ -88,7 +88,7 @@ How many books are on people's to read pile?
 
 `SELECT count(*) FROM to_read`
 
-and for the hobbit?
+And for the hobbit?
 
 `SELECT count(*) FROM to_read WHERE book_id = 7`
 
@@ -96,9 +96,17 @@ What else can we do?  Lets go to the ratings table:
 
 `SELECT avg(rating) FROM ratings`
 
-Not so useful, this is our average rating across all books
+Not so useful, this is our average rating across all books.  It's quite high (almost 4!) but this is the "best books" extract.
+Lets get the average rating by book though:
 
-`SELECT book_id, avg(rating) as avg_rating FROM ratings GROUP BY book_id ORDER BY avg_rating DESC`
+```
+SELECT
+    book_id,
+    avg(rating) as avg_rating
+FROM ratings
+GROUP BY book_id
+ORDER BY avg_rating DESC
+```
 
 ### aggregations AND joins
 
