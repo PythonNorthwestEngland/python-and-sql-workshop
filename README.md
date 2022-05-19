@@ -215,3 +215,25 @@ We'll be using the `sqlite3` module to talk to our database, which is part of th
 
 Use [this code](https://github.com/PythonNorthwestEngland/python-and-sql-workshop/blob/main/sqlite_python.py) to setup a connection to your books database.
 
+If you run the code as currently implemented, it shows an example of transactions.
+If this is run on a fresh download of the database it should produce the following output:
+
+```
+== Inserting book (Architecting Python) ================================
+New book id: 9983
+to_read table (after the first insert):
+row['book_id']=9983 row['user_id']=100000
+== Inserting book with an error (Fluent Python)===========================
+New book id: 9984
+to_read table (just before the error, still in the transaction):
+row['book_id']=9983 row['user_id']=100000
+row['book_id']=9984 row['user_id']=100000
+Both our books are in the to read pile
+Ooops, we failed!
+== Querying after the error, outside the transaction =======================
+to_read table (just after the error):
+row['book_id']=9983 row['user_id']=100000
+Books table:
+9983 Architecture Patterns With Python Harry J.W. Percival, Bob Gregory
+```
+

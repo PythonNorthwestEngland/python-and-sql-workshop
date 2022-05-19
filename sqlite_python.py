@@ -45,7 +45,9 @@ LIMIT :limit
 for row in cur:
     print(f"{row['book_id']} {row['title']}")
 
-print("== Inserting book==============================================")
+print(
+    "== Inserting book (Architecture in Python) =============================================="
+)
 
 # insert a python book successfully
 # Also, insert this to our to_read pile
@@ -85,7 +87,9 @@ with conn:
     for row in cur:
         print(f"{row['book_id']=} {row['user_id']=}")
 
-print("== Inserting book with an error ========================================")
+print(
+    "== Inserting book with an error (Fluent Python) ========================================"
+)
 
 
 # insert a python book
@@ -160,6 +164,8 @@ LIMIT :limit
 """,
     {"title": "python", "limit": 10},
 )
+
+print("books results (just after the error)")
 for row in cur:
     print(f"{row['book_id']} {row['title']} {row['authors']}")
 
