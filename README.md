@@ -182,6 +182,31 @@ FROM best_books
 LEFT JOIN books ON best_books.book_id = books.book_id;
 ```
 
+Or more complicated queries
+
+```sql
+with total_ratings as (
+	SELECT book_id,
+	count(*) as total_reviews,
+	count(case when rating = 5 then 1 end) as five_star -- `count` counts the number of non-null rows, and `case` emits null if there's no match
+	FROM ratings 
+	GROUP BY book_id
+), best_books as (
+	SELECT
+		book_id,
+		five_star,
+		total_reviews,
+		five_star * 1.0 / total_reviews as prop_five_star
+	FROM total_ratings
+)
+SELECT title, authors, five_star, total_reviews, prop_five_star
+FROM best_books
+LEFT JOIN books ON best_books.book_id = books.book_id
+ORDER BY prop_five_star DESC
+LIMIT 5
+;
+```
+
 ## Part Two
 
 We'll be using the `sqlite3` module to talk to our database, which is part of the Python standard library. The docs are [here](https://docs.python.org/3/library/sqlite3.html)
