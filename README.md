@@ -21,17 +21,33 @@ First, let's try some querying or reading data
 
 1. Open the database
 2. Go to the "Execute SQL" tab
-3. Type in `SELECT book_id, title, authors FROM books WHERE original_publication_year = 1937;`
 
-4. `SELECT book_id, title, authors, original_publication_year FROM books WHERE authors like '%iain%banks%'`
-5. `SELECT book_id, title, authors, original_publication_year FROM books WHERE authors like '%iain%banks%' ORDER BY original_publication_year`
-6. `SELECT book_id, title, authors, original_publication_year FROM books WHERE authors like '%iain%banks%' ORDER BY original_publication_year LIMIT 5`
+```sql
+SELECT book_id, title, authors FROM books WHERE original_publication_year = 1937;
+```
+
+```sql
+SELECT book_id, title, authors, original_publication_year FROM books WHERE authors like '%iain%banks%'
+```
+```sql
+SELECT book_id, title, authors, original_publication_year FROM books WHERE authors like '%iain%banks%' ORDER BY original_publication_year;
+```
+```sql
+SELECT book_id, title, authors, original_publication_year FROM books WHERE authors like '%iain%banks%' ORDER BY original_publication_year LIMIT 5
+```
 
 ### Create
 
 Now lets try adding some data.  This data set is missing python books!
 
-1. Replace that entered SQL with `INSERT INTO books(authors, title, original_title, original_publication_year, isbn13) VALUES ('Luciano Ramalho', 'Fluent Python', 'Fluent Python', 2015, '9781491946008') returning book_id`
+1. Replace that entered SQL with 
+
+```sql
+INSERT INTO books(authors, title, original_title, original_publication_year, isbn13) 
+VALUES ('Luciano Ramalho', 'Fluent Python', 'Fluent Python', 2015, '9781491946008')
+RETURNING book_id
+;
+```
 
 Feel free to replace those things with your own favourite python book, or other book!
 
@@ -49,7 +65,9 @@ WHERE book_id=<that book_id>
 
 We can also delete out data. Let's say user_id 4000 has left our site:
 
-1. `DELETE FROM ratings WHERE user_id = 4000;`
+```sql
+DELETE FROM ratings WHERE user_id = 4000;
+```
 
 ### Joining across tables
 
@@ -58,7 +76,9 @@ Link tables together to get more information using [JOIN statements](https://www
 
 Which books are on user #315's to read pile?
 
-`SELECT book_id FROM to_read WHERE user_id = 315`
+```sql
+SELECT book_id FROM to_read WHERE user_id = 315;
+```
 
 ... whole bunch of IDs, not so helpful.  We could look them up 'by hand', as it were:
 
@@ -95,15 +115,21 @@ WHERE user_id = 315
 
 How many books are on people's to read pile?
 
-`SELECT count(*) FROM to_read`
+```sql
+SELECT count(*) FROM to_read;
+```
 
 and for the hobbit? You might recall from ealier it has a `book_id` of 7
 
-`SELECT count(*) FROM to_read WHERE book_id = 7`
+```sql
+SELECT count(*) FROM to_read WHERE book_id = 7;
+```
 
 What else can we do?  Lets go to the ratings table:
 
-`SELECT avg(rating) FROM ratings`
+```sql
+SELECT avg(rating) FROM ratings;
+```
 
 Not so useful, this is our average rating across all books.  It's quite high (almost 4!) but this is the "best books" extract.
 
@@ -116,7 +142,7 @@ SELECT
 FROM ratings
 GROUP BY book_id
 ORDER BY avg_rating DESC
-LIMIT 5
+LIMIT 5;
 ```
 
 This is perhaps still not very useful, it's just the book_id
