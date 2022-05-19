@@ -17,7 +17,7 @@ We'll be learning about the main "CRUD" operations and exploring the SnakeReads 
 ### Read
 
 
-First, let's try some querying
+First, let's try some querying or reading data
 
 1. Open the database
 2. Go to the "Execute SQL" tab
@@ -29,17 +29,25 @@ First, let's try some querying
 
 Now lets try adding some data.  This data set is missing python books!
 
-1. Replace that entered SQL with `INSERT INTO books(authors, title, original_title, original_publication_year, isbn13) VALUES ('Luciano Ramalho', 'Fluent Python', 'Fluent Python', 2015, '9781491946008')`
+1. Replace that entered SQL with `INSERT INTO books(authors, title, original_title, original_publication_year, isbn13) VALUES ('Luciano Ramalho', 'Fluent Python', 'Fluent Python', 2015, '9781491946008') returning book_id`
+
+Feel free to replace those things with your own favourite python book, or other book!
 
 ### Update
 
-UPDATE statements
+UPDATE statements - changing something.
+
+```
+UPDATE books
+SET authors = 'Luciano Gama de Sousa Ramalho'
+WHERE book_id=<that book_id>
+```
 
 ### Delete
 
-We can also delete out data
+We can also delete out data. Let's say user_id 400 has left our site:
 
-1. `DELETE FROM books WHERE original_publication_year = 2000; -- the millenium was overrated`
+1. `DELETE FROM ratings WHERE user_id = 400;`
 
 ### Joining across tables
 
@@ -94,7 +102,7 @@ Not so useful, this is our average rating across all books
 
 ### aggregations AND joins
 
-But we have IDS so join!
+But we have ids so, we can join!
 
 ```
 -- this is a common table expression
