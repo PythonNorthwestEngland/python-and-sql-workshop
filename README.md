@@ -27,13 +27,24 @@ SELECT book_id, title, authors FROM books WHERE original_publication_year = 1937
 ```
 
 ```sql
-SELECT book_id, title, authors, original_publication_year FROM books WHERE authors like '%iain%banks%'
+SELECT book_id, title, authors, original_publication_year
+FROM books
+WHERE authors like '%iain%banks%'
 ```
 ```sql
-SELECT book_id, title, authors, original_publication_year FROM books WHERE authors like '%iain%banks%' ORDER BY original_publication_year;
+SELECT
+book_id, title, authors, original_publication_year
+FROM books
+WHERE authors like '%iain%banks%'
+ORDER BY original_publication_year;
 ```
 ```sql
-SELECT book_id, title, authors, original_publication_year FROM books WHERE authors like '%iain%banks%' ORDER BY original_publication_year LIMIT 5
+SELECT
+book_id, title, authors, original_publication_year
+FROM books
+WHERE authors like '%iain%banks%'
+ORDER BY original_publication_year
+LIMIT 5
 ```
 
 ### Create
@@ -45,7 +56,6 @@ Now lets try adding some data.  This data set is missing python books!
 ```sql
 INSERT INTO books(authors, title, original_title, original_publication_year, isbn13) 
 VALUES ('Luciano Ramalho', 'Fluent Python', 'Fluent Python', 2015, '9781491946008')
-RETURNING book_id
 ;
 ```
 
@@ -58,7 +68,7 @@ UPDATE statements - changing something.  Let's give Luciano his full name:
 ```sql
 UPDATE books
 SET authors = 'Luciano Gama de Sousa Ramalho'
-WHERE book_id=<that book_id>
+WHERE title='Fluent Python'
 ```
 
 ### Delete
